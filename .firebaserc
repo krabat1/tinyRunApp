@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tasks78": {
+      "hosting": {
+        "tasks": [
+          "tasks78"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tasks78"
+  }
+}

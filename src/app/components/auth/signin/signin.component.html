@@ -1,0 +1,29 @@
+<fieldset *ngIf="!this.userService.loggedIn">
+    <legend>Login</legend>
+    <p>
+        <input type="email" [(ngModel)]="loginModel.email" placeholder="email" (ngModelChange)="validateEmail($event)">
+    </p>
+    <p>
+        <input type="password" [(ngModel)]="loginModel.pass" placeholder="password"> {{loginStatus}} <!--always visible here-->
+    </p>
+    <p><input 
+        type="checkbox" 
+        id="lostpass"
+        [checked]="lostPass"
+        (change)="lostPass = !lostPass"/><label for="lostpass">I lost my password</label></p>
+    <p *ngIf="this.loginModel.email.length > 0 && this.loginModel.pass.length > 0 && !lostPass">
+        <button (click)="login()">login</button>
+    </p>
+    <p *ngIf="lostPass && this.loginModel.email == ''">Enter your email address first</p>
+    <p *ngIf="lostPass && !this.emailValid &&  this.loginModel.email != ''">What you entered is not valid address yet</p>
+    <p *ngIf="lostPass && this.emailValid && !this.emailReserved && this.loginModel.email != ''">E-mail valid but not found yet</p>
+    <p *ngIf="lostPass && this.emailReserved &&  this.loginModel.email != ''">
+        <button type="submit" (click)="resetPass()" class="btn btn-default">Send recovery email</button> {{resetStatus}}
+    </p>
+</fieldset>
+<fieldset *ngIf="this.userService.loggedIn">
+    <legend>Logout</legend>
+    <p>
+        <button (click)="logout()">logout</button> {{logoutStatus}}
+    </p>
+</fieldset>

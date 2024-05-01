@@ -1,0 +1,133 @@
+<ng-container *ngIf="this.userService.user !== null">
+    <nav class="tabs">
+        <div [class]="selected == 'ver' ? 'active' : ''"
+            *ngIf="this.userService.loggedIn && !this.userService.user.emailVerified">
+            <input type="radio" name="tabs" id="ver" value="ver" [(ngModel)]="this.selected"
+                (ngModelChange)="select($event)">
+            <label for="ver">Verify your email</label>
+        </div>
+        <div [class]="selected == 'namex' ? 'active' : ''">
+            <input type="radio" name="tabs" id="namex" value="namex" [(ngModel)]="this.selected"
+                (ngModelChange)="select($event)">
+            <label for="namex">Change display name</label>
+        </div>
+        <!--
+        <div [class]="selected == 'mail' ? 'active' : ''">
+            <input type="radio" name="tabs" id="mail" value="mail" [(ngModel)]="this.selected"
+                (ngModelChange)="select($event)">
+            <label for="mail">Change email address</label>
+        </div>-->
+        <div [class]="selected == 'pass' ? 'active' : ''">
+            <input type="radio" name="tabs" id="pass" value="pass" [(ngModel)]="this.selected"
+                (ngModelChange)="select($event)">
+            <label for="pass">Change password</label>
+        </div>
+        
+        <div [class]="selected == 'del' ? 'active' : ''">
+            <input type="radio" name="tabs" id="del" value="del" [(ngModel)]="this.selected"
+                (ngModelChange)="select($event)">
+            <label for="del">Delete your account</label>
+        </div>
+        <div class="dummy"></div>
+    </nav>
+
+
+
+    <fieldset>
+        <legend><span>Current data</span></legend>
+        <dl *ngIf="userService.user !== null">
+            <dt>Email:</dt>
+            <dd>{{userService.user.email}}</dd>
+            <dt>Email verification:</dt>
+            <dd *ngIf="userService.user.emailVerified;then verified else notverified"></dd>
+            <ng-template #verified>
+                <dd>verified</dd>
+            </ng-template>
+            <ng-template #notverified>
+                <dd>not verified</dd>
+            </ng-template>
+            <dt>Displayed name:</dt>
+            <dd>{{ (userService.user.displayName !== null) ? userService.user.displayName : 'not set' }}</dd>
+        </dl>
+    </fieldset>
+    <!-- *ngIf="selected == 'namex'" [class]="selected == 'namex' ? 'show' : 'hide'" -->
+    <div>
+
+        <label class="accordion" for="pass" [class]="selected == 'pass'? 'active' : ''">Change password</label>
+        <fieldset [@slideInOut]="selected == 'pass'" *ngIf="selected == 'pass'">
+            <legend>Change password</legend>
+            <p><input type="password" 
+                [(ngModel)]="loginModel.pass" 
+                placeholder="current password"> {{reauthStatus}}</p>
+            <p [class]="newPass.length > 0 ? 'filled' : 'notf'">
+                <input type="password" 
+                [class]="newPassValid ? 'good' : 'bad'"
+                [(ngModel)]="newPass" 
+                (ngModelChange)="validatePass($event)"
+                placeholder="new password"></p>
+            <p [class]="newPassAgain.length > 0 ? 'filled' : ''">
+                <input type="password" 
+                [class]="newPassAgainValid ? 'good' : 'bad'"
+                [(ngModel)]="newPassAgain" 
+                (ngModelChange)="validatePassAgain($event)"
+                placeholder="new password again"> {{changePasswordStatus}}</p>
+            <p><button (click)="changePassword()">Change password</button></p>
+            <ul>
+                <li class="lsn"><u>Password requirements:</u></li>
+                <li>At least one upper case English letter</li>
+                <li>At least one lower case English letter</li>
+                <li>At least one digit</li>
+                <li>At least one special character: <span class="nowrap">#?!&#64;$%^&*-_</span></li>
+                <li>Minimum eight character</li>
+            </ul>
+        </fieldset>
+
+        <label class="accordion" for="namex" [class]="selected == 'namex' ? 'active' : ''">Change display name</label>
+        <fieldset [@slideInOut]="selected == 'namex'" *ngIf="selected == 'namex'">
+            <legend><span>Change display name</span></legend>
+            <!--<p><a href="https://github.com/firebase/firebase-tools/issues/6748#issuecomment-1932656631"></a></p>-->
+            <p [class]="newDisplayName.length>0 ? 'filled' : ''">
+                <input type="text" [class]="displayNameValid ? 'good' : 'bad'"
+                    [placeholder]="userService.user.displayName" [(ngModel)]="newDisplayName"
+                    (ngModelChange)="validateDisplayName($event)"> {{displayNameExistsStatus}}
+            </p>
+            <p *ngIf="!displayNameExists && displayNameValid">
+                <button (click)="this.setDisplayName()">Change display name</button> {{changeDisplayNameStatus}}
+            </p>
+            <ul>
+                <li class="lsn"><u>Display name requirements:</u></li>
+                <li>Begins with lower/uppercase English letter</li>
+                <li>Available special characters: <span class="nowrap">-_</span></li>
+                <li>Ends with lower/uppercase English letter or number</li>
+                <li>Min. two character (max 19)</li>
+            </ul>
+        </fieldset>
+        <label class="accordion" for="ver" [class]="selected == 'ver' ? 'active' : ''">Verify your email</label>
+        <!-- *ngIf="selected == 'ver'"[class]="selected == 'ver' ? 'show' : 'hide'"-->
+        <fieldset [@slideInOut]="selected == 'ver'" *ngIf="selected == 'ver'">
+            <legend><span>Verify email</span></legend>
+            <p>
+                <input type="password" name="" id="" [(ngModel)]="loginModel.pass" placeholder="password">
+                {{reauthStatus}}
+            </p>
+            <p>
+                <button (click)="this.sendVerificationMail()">Send verification email</button>
+                {{sendVerificationStatus}}
+            </p>
+        </fieldset>
+        <label class="accordion" for="del" [class]="selected == 'del' ? 'active' : ''">Delete your account</label>
+        <!-- *ngIf="selected == 'del'"[class]="selected == 'del' ? 'show' : 'hide'"-->
+        <fieldset  [@slideInOut]="selected == 'del'" *ngIf="selected == 'del'">
+            <legend><span>Delete account</span></legend>
+            <p>
+                <input type="email" [(ngModel)]="loginModel.email" placeholder="email">
+            </p>
+            <p>
+                <input type="password" [(ngModel)]="loginModel.pass" placeholder="password"> {{reauthStatus}}
+            </p>
+            <p>
+                <button (click)="delete()">delete account</button> {{deleteStatus}}
+            </p>
+        </fieldset>
+    </div>
+</ng-container>

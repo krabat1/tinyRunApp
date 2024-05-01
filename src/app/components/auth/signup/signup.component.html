@@ -1,0 +1,38 @@
+<fieldset>
+    <legend>Register</legend>
+    <p [class]="registerModel.email.length > 0 ? 'filled' : ''">
+        <input 
+        type="email" 
+        [(ngModel)]="registerModel.email"
+        (ngModelChange)="validateEmail($event)" 
+        [class]="emailIsValid ? 'good' : 'bad'"
+        placeholder="email"> {{emailReservedMessage}}
+    </p>
+    <p [class]="registerModel.pass.length > 0 ? 'filled' : ''">
+        <input 
+        type="password" 
+        [(ngModel)]="registerModel.pass" 
+        (ngModelChange)="validatePass($event)"
+        [class]="passIsValid ? 'good' : 'bad'"
+        placeholder="password">
+    </p>
+    <p [class]="registerModel.pass.length > 0 && passAgain.length >= 0  ? 'filled' : ''">
+        <input 
+        type="password" 
+        [(ngModel)]="this.passAgain"
+        (ngModelChange)="validatePassAgain($event)" 
+        [class]="passAgainIsValid ? 'good' : 'bad'"
+        placeholder="password again">
+    </p>
+    <p *ngIf="this.emailIsValid && this.passIsValid && this.passAgainIsValid && !this.emailReserved">
+        <button (click)="register()">register</button> {{registerStatus}}
+    </p>
+    <ul>
+        <li class="lsn"><u>Password requirements:</u></li>
+        <li>At least one upper case English letter</li>
+        <li>At least one lower case English letter</li>
+        <li>At least one digit</li>
+        <li>At least one special character: <span class="nowrap">#?!&#64;$%^&*-_</span></li>
+        <li>Minimum eight character</li>
+    </ul>
+</fieldset>

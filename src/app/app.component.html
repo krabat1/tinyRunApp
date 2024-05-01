@@ -1,0 +1,14 @@
+<!--nav>
+    <a [routerLink]="['/sign-up']">Sign up</a>
+    <a [routerLink]="['/sign-in']">Sign in</a>
+</nav-->
+<nav>
+    <div *ngIf="this.userService.loggedIn"><a  [routerLink]="'/sign-out'">Sign out</a> :: </div>
+    <div *ngIf="!this.userService.loggedIn"><a  [routerLink]="'/sign-in'">Sign in</a> :: </div>
+    <div *ngIf="!this.userService.loggedIn"><a  [routerLink]="['/sign-up']">Sign up</a> :: </div>
+    <div *ngIf="this.userService.loggedIn"><a  [routerLink]="'/account'">account</a> :: </div>
+    {{this.userService.loggedIn ? 'Logged in (' + this.userService.user.email + ' / ' + this.userService.user.displayName +')'  : 'No user logged in'}}
+</nav>
+<hr>
+
+<router-outlet></router-outlet>
