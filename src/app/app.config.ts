@@ -26,6 +26,6 @@ export const appConfig: ApplicationConfig = {
     ]),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
     // https://stackoverflow.com/a/71821658/4279940
-    provideAnimations()
+    provideAnimations(), importProvidersFrom(provideFirebaseApp(() => initializeApp({"projectId":"tinyrunapp","appId":"1:877702984813:web:6fe2f4eff91e95be397b64","storageBucket":"tinyrunapp.appspot.com","apiKey":"AIzaSyCK_Ox3WwraJu6QlAD8z0qrh7RlPJJgm1k","authDomain":"tinyrunapp.firebaseapp.com","messagingSenderId":"877702984813"}))), importProvidersFrom(provideAuth(() => getAuth())), importProvidersFrom(provideFirestore(() => getFirestore())), importProvidersFrom(provideDatabase(() => getDatabase()))
   ]
 };

@@ -1,14 +1,14 @@
 {
   "targets": {
-    "tasks78": {
+    "tinyrunapp": {
       "hosting": {
-        "tasks": [
-          "tasks78"
+        "tiny-run-app": [
+          "tinyrunapp"
         ]
       }
     }
   },
   "projects": {
-    "default": "tasks78"
+    "default": "tinyrunapp"
   }
 }

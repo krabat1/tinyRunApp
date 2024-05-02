@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tasks": {
+    "tiny-run-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tasks",
+            "outputPath": "dist/tiny-run-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -53,13 +53,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -68,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tasks:build:production"
+              "buildTarget": "tiny-run-app:build:production"
             },
             "development": {
-              "buildTarget": "tasks:build:development"
+              "buildTarget": "tiny-run-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "tasks:build"
+            "buildTarget": "tiny-run-app:build"
           }
         },
         "test": {
@@ -108,12 +102,12 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "tasks:build:production",
-              "serveTarget": "tasks:serve:production"
+              "buildTarget": "tiny-run-app:build:production",
+              "serveTarget": "tiny-run-app:serve:production"
             },
             "development": {
-              "buildTarget": "tasks:build:development",
-              "serveTarget": "tasks:serve:development"
+              "buildTarget": "tiny-run-app:build:development",
+              "serveTarget": "tiny-run-app:serve:development"
             }
           },
           "defaultConfiguration": "production"
