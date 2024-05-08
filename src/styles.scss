@@ -1,1 +1,111 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: .5rem;
+    app-root > router-outlet + *{
+        display: flex;
+        flex-direction: column;
+        gap:.5rem;
+    }
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: .5rem 1rem;
+    //min-height: 2rem;
+    flex-wrap: wrap;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+nav + hr {
+    margin-bottom: 1rem;
+}
+
+fieldset{
+    padding: 0.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    legend {
+        padding: 0.1rem 0.5rem;
+        border: 2px groove #c0c0c0;
+        //min-width: 11.6875rem;
+        min-width: 11.3rem;
+        //min-height: 1.4772rem;
+        //display: flex;
+        //justify-content: center;
+        & span{
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    dl {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+    }
+    dt {
+        grid-column: 1;
+    }
+    dd {
+        grid-column: 2;
+        align-items: end;
+        display: grid;
+    }
+
+    p{
+        &.filled input.good {
+            background: #008800;
+            color: white;
+        }
+    
+        &.filled input.bad {
+            background: #880000;
+            color: white;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=password] {
+            border-style: solid;
+            border-width: 1px;
+            padding: .3rem .5rem;
+            outline: none;
+        }
+
+        input[type=checkbox] {
+            margin-right: .5rem;
+        }
+
+        label{
+            cursor: pointer;
+        }
+
+        button {
+            padding: 0.1rem 0.4rem;
+        }
+    }
+    ul {
+        padding-left: inherit;
+        li.lsn{
+            margin-left: -1rem;
+        }
+        li .nowrap{
+            white-space: nowrap;
+        }
+    }
+    .lsn{
+        list-style: none;
+    }
+}

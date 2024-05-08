@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+fieldset p.filled input.good {
+  background: #008800;
+  color: white;
+}
+
+fieldset p.filled input.bad {
+  background: #880000;
+  color: white;
+}/*# sourceMappingURL=styles.css.map */

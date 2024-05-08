@@ -43,8 +43,8 @@ export class AuthService {
  * ---------------- account component
  * reAuthenticate
  * delete
- * !set displayName
- * !check displayName during set displayName
+ * set displayName
+ * check displayName during set displayName
  * !change email
  * !check email during change email
  * SendVerificationMail
