@@ -1,0 +1,85 @@
+
+h2{
+    display: flex;
+    align-items: center;
+    span.workout_name{
+        flex:2;
+    }
+    span.example-accordion-item-description{
+        flex:3;
+    }
+}
+
+form > div{
+  padding-top: 1rem;
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  & div:first-child mat-form-field{
+    padding-right: 1rem;
+  }
+  & div:last-child button{
+    margin-right: 1rem;
+  }
+}
+.example-accordion-item-body,
+.example-accordion-item-header{
+  padding: 0 .5rem 0 .5rem !important;
+} 
+.exercise_droplist{
+    display: flex;
+    flex-direction: column;
+    & > .cdk-drag{
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #cecece;
+        .title{
+            flex: 1;
+        }   
+        &:last-child{
+            border-width: 0px;
+        }
+    }
+}
+
+.example-accordion-item {
+    display: block;
+    border: solid 1px #ccc;
+}
+.example-accordion-item + .example-accordion-item {
+    border-top: none;
+  }
+  
+  .example-accordion-item-header {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+  }
+  
+  .example-accordion-item-description {
+    font-size: 0.85em;
+    color: #999;
+  }
+  
+  .example-accordion-item-header,
+  .example-accordion-item-body {
+    padding: 0 1rem;
+    margin-bottom: 0;
+  }
+  
+  .example-accordion-item-header:hover {
+    cursor: pointer;
+    background-color: #eee;
+  }
+  
+  .example-accordion-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
+  .example-accordion-item:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  

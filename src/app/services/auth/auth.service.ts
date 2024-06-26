@@ -138,6 +138,7 @@ export class AuthService {
     }
   }
 
+  // check email exist on the registration process
   async emailTaken(email: string): Promise<boolean | Error> {
     try {
       //const firestore = await this.firestoreService.emailTaken(email);
@@ -218,6 +219,7 @@ export class AuthService {
     })
   }
 
+  // check display name exists when set or change it
   async displayNameTaken(displayName: string) {
     try {
       const firestore = await this.firestoreService.checkCollectionPropertyValueBoolean('users', 'displayNameLow', displayName.toLowerCase())

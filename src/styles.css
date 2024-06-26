@@ -1,10 +1,126 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/purple-green.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+body app-root > router-outlet + * {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+nav h3 {
+  margin: 0;
+}
+
+nav + hr {
+  margin-bottom: 1rem;
+}
+
+fieldset {
+  padding: 0.5rem 1rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+fieldset legend {
+  padding: 0.1rem 0.5rem;
+  border: 2px groove #c0c0c0;
+  min-width: 11.3rem;
+}
+fieldset legend span {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+fieldset dl {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+fieldset dt {
+  grid-column: 1;
+}
+fieldset dd {
+  grid-column: 2;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  display: grid;
+}
 fieldset p.filled input.good {
   background: #008800;
   color: white;
 }
-
 fieldset p.filled input.bad {
   background: #880000;
   color: white;
+}
+fieldset p input[type=text],
+fieldset p input[type=email],
+fieldset p input[type=password] {
+  border-style: solid;
+  border-width: 1px;
+  padding: 0.3rem 0.5rem;
+  outline: none;
+}
+fieldset p input[type=checkbox] {
+  margin-right: 0.5rem;
+}
+fieldset p label {
+  cursor: pointer;
+}
+fieldset p button {
+  padding: 0.1rem 0.4rem;
+}
+fieldset ul {
+  padding-left: inherit;
+}
+fieldset ul li.lsn {
+  margin-left: -1rem;
+}
+fieldset ul li .nowrap {
+  white-space: nowrap;
+}
+fieldset .lsn {
+  list-style: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,41 @@
+h1 {
+  font-weight: bold;
+}
+
+h1 + div {
+  border-top: 1px solid #ccc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+h1 + div form {
+  padding-top: 16px;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  white-space: nowrap;
+}
+h1 + div div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+h1 + div button, h1 + div mat-form-field {
+  margin-right: 0.5rem;
+}/*# sourceMappingURL=workout.component.css.map */

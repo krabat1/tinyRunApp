@@ -1,1 +1,19 @@
-/*# sourceMappingURL=app.component.css.map */
+.example-spacer {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.navbuttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.navbuttons .verticaldivider {
+  height: 2rem;
+  margin: 0 0.2rem;
+}
+
+mat-slide-toggle {
+  padding: 0 0 0 0.5rem;
+}/*# sourceMappingURL=app.component.css.map */

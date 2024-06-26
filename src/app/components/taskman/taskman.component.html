@@ -1,1 +1,126 @@
-<p>taskman works!</p>
+<p class="clock-container"><span class="clock"><img src="../../assets/clockhand.png"></span></p>
+<div class="control">
+    <button [ngClass]="paused ? 'green' : 'red'" (click)="startWatchPosition(this.timeout)">
+        <span *ngIf="paused === true && timer === 0">start</span>
+        <span *ngIf="paused === true && timer > 0">resume</span>
+        <span *ngIf="paused === false">pause</span>
+    </button>
+    <button class="red" (click)="stop()"><span>reset</span></button>    
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Timer</th>
+            <th>Distance</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td> {{ hours }}:<ng-container *ngIf="minutes.toString().length === 1">0</ng-container>{{ minutes
+            }}:<ng-container *ngIf="seconds.toString().length === 1">0</ng-container>{{ seconds }} </td>
+            <td>{{dist_km(distSum)}} km {{two_decimal(dist_m(distSum))}} m</td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>Pace</th>
+            <th>Now</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{pace_minutes(avg_pace)}}'{{round(pace_seconds(avg_pace))}}''</td>
+            <td>{{pace_minutes(pace)}}'{{round(pace_seconds(pace))}}''</td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>Speed</th>
+            <th>Now</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{two_decimal(avg_speed)}} km/h</td>
+            <td>{{two_decimal(speed)}} km/h</td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <th class="td">Latest dist:</th>
+            <td>{{dist_km(dist)}} km {{two_decimal(dist_m(dist))}} m</td>
+        </tr>
+        <tr>
+            <th class="td">Latest time:</th>
+            <td>{{time_prev}} sec</td>
+        </tr>
+    </tbody>
+</table>
+<!--div>{{data_string}}</!--div-->
+<div id="log" style="word-wrap: break-word;"></div>
+<!--div>
+    <p><span>
+            <div class="flex">
+                <div>Összes táv</div>
+                <div class="dots"></div>
+            </div>
+        </span><span>{{dist_km(distSum)}} km {{two_decimal(dist_m(distSum))}} m</span></p>
+    <p><span>
+            <div class="flex">
+                <div>Összes idő:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span>{{ hours }}:<ng-container *ngIf="minutes.toString().length === 1">0</ng-container>{{ minutes
+            }}:<ng-container *ngIf="seconds.toString().length === 1">0</ng-container>{{ seconds }} </span></p>
+    <p><span></span><span>({{timer}}s) 📍 {{next_geo_time()}}ms</span> </p>
+    <p><span>
+            <div class="flex">
+                <div>Átlagsebesség:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span>{{two_decimal(avg_speed)}} kmph</span> </p>
+    <p><span>
+            <div class="flex">
+                <div>Átlagtempó:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span> {{pace_minutes(avg_pace)}}'{{round(pace_seconds(avg_pace))}}''</span>
+    </p>
+    <p>&nbsp;</p>
+    <p><span>
+            <div class="flex">
+                <div>Legutóbbi táv:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span>{{dist_km(dist)}} km {{two_decimal(dist_m(dist))}} m</span></p>
+    <p><span>
+            <div class="flex">
+                <div>Legutóbbi idő:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span>{{time_prev}} sec</span></p>
+    <p><span>
+            <div class="flex">
+                <div>Legutóbbi sebesség:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span>{{two_decimal(speed)}} kmph</span></p>
+    <p><span>
+            <div class="flex">
+                <div>Legutóbbi tempó:</div>
+                <div class="dots"></div>
+            </div>
+        </span><span> {{pace_minutes(pace)}}'{{round(pace_seconds(pace))}}''</span></p>
+    <p><span>{{geoMessage}}</span><span></span></p>
+    <p>&nbsp;</p>
+    <p><span>Fresh location:</span><span></span></p>
+    <p><span>{{latitude}}</span><span>{{longitude}}</span></p>
+    <p><span>{{lat_prev}}</span><span>{{long_prev}}</span></p>
+    <p></p>
+    <p></p>
+</!--div>
+<p>dist: {{this.dist}}</p>
+<p>distSum: {{this.distSum}}</p>
+<p>timer: {{this.timer}}</p>
+<p>clock:{{clock()}} {{paused}}</p>-->

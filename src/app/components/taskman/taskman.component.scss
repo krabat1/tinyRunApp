@@ -1,0 +1,91 @@
+:host{
+    --clock-size: 7rem;
+}
+.clock-container {
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    & > .clock{
+        height: var(--clock-size);
+        width: var(--clock-size);
+        background-image: url(../../../assets/clockface.png);
+        display: inline-block;
+        background-size: cover;
+        & > img{
+            height: var(--clock-size);
+            transform: rotate(var(--clockrot));
+        }         
+    }
+}
+
+
+
+
+.control{
+    display: flex;
+    justify-content: space-evenly;
+    & > button {
+        border-radius: 50%;
+        aspect-ratio: 1 / 1;
+        display: block;
+
+        border-width: thick;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 1rem;
+        &.red{
+            border-color: red;
+            background: hsl(0, 33%, 60%);
+        }
+        &.green{
+            border-color: green;
+            background: hsl(120, 33%, 60%);
+        }
+        & > span {
+            display: block;
+            min-width: 6rem;
+            text-align: center;
+        }
+    }
+}
+table {
+    border-collapse: collapse;
+    font-size: 150%;
+}
+th {
+    border-bottom: 2px solid #efefef;
+    padding-bottom: .2rem;
+    text-align: center;
+}
+td, .td {
+    border-bottom: 2px solid #ababab;
+    padding: .2rem;
+    text-align: center;
+}
+div {
+    display: table;
+    & > p {
+        display: table-row;
+        & > span {
+            display: table-cell;
+            vertical-align: middle;
+            & > .flex{
+                display: flex;
+                width: 100%;
+                & > div {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+.dots {
+    flex: 1;
+    background: radial-gradient(
+        circle at 50% 0.8em,
+        #000 5%,
+        transparent 1%);
+    background-size: 0.5em;
+    background-repeat: repeat-x;
+  }

@@ -1,0 +1,48 @@
+<!--p>workout works!</!--p-->
+<div>
+    <h1>Workout Manager</h1>
+    <div>
+        <form (submit)="addWorkout()">
+            <mat-form-field class="example-full-width">
+                <mat-label>Workout name</mat-label>
+                <input matInput [(ngModel)]="newWorkoutName" name="workout_name">
+            </mat-form-field>
+            <!--input [(ngModel)]="newWorkoutName" placeholder="Workout neve" name="workout_name" required>
+            <button-- type="submit">Workout hozzáadása</button-->
+            <button mat-icon-button  color="basic" type="submit"
+            matTooltip="Add workout" [matTooltipPosition]="'above'">
+                <mat-icon color="primary">add_circle</mat-icon>
+            </button>
+        </form>
+        <div>
+            <button mat-icon-button (click)="enableWorkoutsMove()" color="basic" aria-label="Move workouts"
+            matTooltip="Move workouts" [matTooltipPosition]="'above'">
+                <mat-icon color="basic">swap_vert</mat-icon>
+            </button>
+            <button mat-icon-button (click)="exportWorkouts()" color="basic" aria-label="Export workouts"
+            matTooltip="Export workouts" [matTooltipPosition]="'above'">
+                <mat-icon color="basic">download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="importClick()" color="basic" aria-label="Import workouts"
+            matTooltip="Import workouts" [matTooltipPosition]="'above'">
+                <mat-icon color="basic">publish</mat-icon>
+            </button>
+            <input style="display:none" type="file" (change)="importWorkouts($event)" accept=".json">
+        
+        </div>
+    </div>
+    <cdk-accordion class="example-accordion">
+         @for (workout of workouts;  track workout; let i = $index){ 
+        <!--<ng-container *ngFor="let workout of workouts; let i = index; trackBy: trackByFn">-->
+        
+            <app-exercise 
+            [workouts]="workouts" 
+            [workout]="workout" 
+            [workout_index]="i" 
+            [moveWorkouts]="moveWorkouts"
+            [is_last_workout]="i === workouts.length - 1" 
+            (exerciseChange)="saveWorkouts()"></app-exercise>
+        <!--</ng-container>-->
+         } 
+    </cdk-accordion>
+</div>

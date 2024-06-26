@@ -1,0 +1,24 @@
+h1 {
+    font-weight: bold;
+}
+h1 + div{
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    form{
+        padding-top: 16px;
+        flex:2;
+        white-space: nowrap;
+    }
+    div{
+        display: flex;
+        justify-content: end;
+        flex: 1;
+    }
+    button, mat-form-field{
+        margin-right: 0.5rem;
+    }
+}

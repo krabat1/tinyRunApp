@@ -1,1 +1,99 @@
-/*# sourceMappingURL=taskman.component.css.map */
+:host {
+  --clock-size: 7rem;
+}
+
+.clock-container {
+  text-align: center;
+  display: block;
+  overflow: hidden;
+}
+.clock-container > .clock {
+  height: var(--clock-size);
+  width: var(--clock-size);
+  background-image: url(../../../assets/clockface.png);
+  display: inline-block;
+  background-size: cover;
+}
+.clock-container > .clock > img {
+  height: var(--clock-size);
+  -webkit-transform: rotate(var(--clockrot));
+          transform: rotate(var(--clockrot));
+}
+
+.control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+.control > button {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: block;
+  border-width: thick;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.control > button.red {
+  border-color: red;
+  background: hsl(0, 33%, 60%);
+}
+.control > button.green {
+  border-color: green;
+  background: hsl(120, 33%, 60%);
+}
+.control > button > span {
+  display: block;
+  min-width: 6rem;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 150%;
+}
+
+th {
+  border-bottom: 2px solid #efefef;
+  padding-bottom: 0.2rem;
+  text-align: center;
+}
+
+td, .td {
+  border-bottom: 2px solid #ababab;
+  padding: 0.2rem;
+  text-align: center;
+}
+
+div {
+  display: table;
+}
+div > p {
+  display: table-row;
+}
+div > p > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+div > p > span > .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+div > p > span > .flex > div {
+  width: auto;
+}
+
+.dots {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background: radial-gradient(circle at 50% 0.8em, #000 5%, transparent 1%);
+  background-size: 0.5em;
+  background-repeat: repeat-x;
+}/*# sourceMappingURL=taskman.component.css.map */

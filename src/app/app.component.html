@@ -1,14 +1,98 @@
-<!--nav>
-    <a [routerLink]="['/sign-up']">Sign up</a>
-    <a [routerLink]="['/sign-in']">Sign in</a>
-</nav-->
-<nav>
-    <div *ngIf="this.userService.loggedIn"><a  [routerLink]="'/sign-out'">Sign out</a> :: </div>
-    <div *ngIf="!this.userService.loggedIn"><a  [routerLink]="'/sign-in'">Sign in</a> :: </div>
-    <div *ngIf="!this.userService.loggedIn"><a  [routerLink]="['/sign-up']">Sign up</a> :: </div>
-    <div *ngIf="this.userService.loggedIn"><a  [routerLink]="'/account'">account</a> :: </div>
-    {{this.userService.loggedIn ? 'Logged in (' + this.userService.user.email + ' / ' + this.userService.user.displayName +')'  : 'No user logged in'}}
-</nav>
-<hr>
+<div class="mat-app-background">
+    <mat-toolbar  color="get-primary(100);">
 
-<router-outlet></router-outlet>
+        <span>tinyRunApp</span>
+        <span class="example-spacer"></span>
+        <div *ngIf="myBreakpoints.HideSmallUp" class="navbuttons">
+            <button mat-button *ngIf="!this.userService.loggedIn" [routerLink]="'/sign-up'">
+                <mat-icon>how_to_reg</mat-icon>
+                <span>Sign up</span>
+            </button> 
+            <button mat-button *ngIf="!this.userService.loggedIn" [routerLink]="'/sign-in'">
+                <mat-icon>login</mat-icon>
+                <span>Sign in</span>
+            </button>
+            <mat-divider *ngIf="!this.userService.loggedIn" [vertical]="true" class="verticaldivider"></mat-divider>
+            <button mat-button *ngIf="this.userService.loggedIn" [routerLink]="'/workouts'">
+                <mat-icon>list_alt</mat-icon>
+                <span>Workouts</span>
+            </button>
+            <button mat-button *ngIf="this.userService.loggedIn" [routerLink]="'/tasks'">
+                <mat-icon class="material-icons-outlined">timer</mat-icon>
+                <span>Timer</span>  
+            </button>
+            <mat-divider *ngIf="this.userService.loggedIn" [vertical]="true" class="verticaldivider"></mat-divider>
+            <button mat-button *ngIf="this.userService.loggedIn" [routerLink]="'/account'">
+                <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+                <span>Account</span>
+            </button>
+            <button mat-button *ngIf="this.userService.loggedIn" [routerLink]="'/sign-out'">
+                <mat-icon>logout</mat-icon>
+                <span>Sign out</span>
+            </button>
+        </div>
+        <div>
+            <mat-slide-toggle #darkModeSwitch  [(ngModel)]="theme" (ngModelChange)="changeTheme()"></mat-slide-toggle>
+        </div>
+    <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon class="material-icons-outlined">favorite</mat-icon>
+        </!--button>
+        <button-- mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+            <mat-icon>share</mat-icon>
+        </button-->
+        <button *ngIf="myBreakpoints.ShowSmallUp" button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" yPosition="below" xPosition="before">
+            <a mat-menu-item *ngIf="!this.userService.loggedIn" [routerLink]="'/sign-up'">
+                <mat-icon>how_to_reg</mat-icon>
+                <span>Sign up</span>
+            </a> 
+            <a mat-menu-item *ngIf="!this.userService.loggedIn" [routerLink]="'/sign-in'">
+                <mat-icon>login</mat-icon>
+                <span>Sign in</span>
+            </a>
+            <mat-divider *ngIf="!this.userService.loggedIn"></mat-divider>
+            <a mat-menu-item *ngIf="this.userService.loggedIn" [routerLink]="'/workouts'">
+                <mat-icon>list_alt</mat-icon>
+                <span>Workouts</span>
+            </a>
+            <a mat-menu-item *ngIf="this.userService.loggedIn" [routerLink]="'/tasks'">
+                <mat-icon class="material-icons-outlined">timer</mat-icon>
+                <span>Timer</span>  
+            </a>
+            <mat-divider *ngIf="this.userService.loggedIn"></mat-divider>
+            <a mat-menu-item *ngIf="this.userService.loggedIn" [routerLink]="'/account'">
+                <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+                <span>Account</span>
+            </a>
+            <a mat-menu-item *ngIf="this.userService.loggedIn" [routerLink]="'/sign-out'">
+                <mat-icon>logout</mat-icon>
+                <span>Sign out</span>
+            </a>
+            <!--div *ngIf="this.userService.loggedIn"><a [routerLink]="'/sign-out'">Sign out</a> :: </!--div>
+            <div *ngIf="!this.userService.loggedIn"><a [routerLink]="'/sign-in'">Sign in</a> :: </div>
+            <div *ngIf="!this.userService.loggedIn"><a [routerLink]="['/sign-up']">Sign up</a> :: </div>
+            <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/account'">account</a> :: </div>
+            <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/tasks'">tasks</a> :: </div>
+            <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/workouts'">workouts</a> :: </div>
+            <div-- *ngIf="this.userService.loggedIn"><a [routerLink]="'/exercises'">exercises</a> :: </div-->
+    
+        </mat-menu>
+    </mat-toolbar>
+    <!--nav>
+        <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/sign-out'">Sign out</a> :: </div>
+        <div *ngIf="!this.userService.loggedIn"><a [routerLink]="'/sign-in'">Sign in</a> :: </div>
+        <div *ngIf="!this.userService.loggedIn"><a [routerLink]="['/sign-up']">Sign up</a> :: </div>
+        <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/account'">account</a> :: </div>
+        <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/tasks'">tasks</a> :: </div>
+        <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/workouts'">workouts</a> :: </div>
+        <div *ngIf="this.userService.loggedIn"><a [routerLink]="'/exercises'">exercises</a> :: </div>
+        {{this.userService.loggedIn ? 'Logged in (' + this.userService.user.email + ' / ' +
+        this.userService.user.displayName +')' : 'No user logged in'}}
+    </!--nav-->
+    <hr>
+    <div style="padding: .5rem;">
+        <router-outlet></router-outlet>
+    </div>
+</div>

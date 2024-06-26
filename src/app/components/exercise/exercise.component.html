@@ -1,0 +1,114 @@
+<cdk-accordion-item  #accordionItem="cdkAccordionItem"  class="example-accordion-item workout" role="button" tabindex="0"
+  [attr.id]="'accordion-header-' + workout_index" [attr.aria-expanded]="accordionItem.expanded"
+  [attr.aria-controls]="'accordion-body-' + workout_index" 
+  (opened)="onExpanded(true, workout_index)" (closed)="onExpanded(false, workout_index)">
+  <!--
+    HEADER
+  -->
+  <h2 class="example-accordion-item-header">
+    <span>
+      <button class="togglebutton" mat-icon-button aria-label="Toggle item" (click)="accordionItem.toggle()"
+      matTooltip="Toggle" [matTooltipPosition]="'above'">
+        <mat-icon color="basic"> {{ accordionItem.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+      </button>
+    </span>
+    <span class="workout_name">{{ workout.name }}</span>
+    
+    <!--<span class="example-accordion-item-description">descr</span>  -->
+    <button *ngIf="moveWorkouts && !is_last_workout" mat-icon-button aria-label="Move downward"
+      (click)="moveWorkout($event, 'down',workout_index)" type="button"
+      matTooltip="Move this workout lower" [matTooltipPosition]="'before'">
+      <mat-icon color="basic">arrow_downward</mat-icon>
+    </button>
+    <!--   -->
+    <button *ngIf="moveWorkouts && workout_index > 0" mat-icon-button aria-label="Move upward"
+      (click)="moveWorkout($event, 'up',workout_index)"
+      matTooltip="Move this workout upper" [matTooltipPosition]="'before'">
+      <mat-icon color="basic">arrow_upward</mat-icon>
+    </button>
+
+
+
+    <button mat-icon-button color="basic" (click)="editWorkoutName($event,workout_index, workout)" type="button"
+      aria-label="Edit"matTooltip="Edit workout name" [matTooltipPosition]="'before'">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="basic" (click)="openAddExerciseForm($event,workout_index)" type="button"
+      class="formButtonPairButton" aria-label="Add exercise" matTooltip="Add exercise" [matTooltipPosition]="'above'">
+      <mat-icon color="primary">add_circle</mat-icon>
+    </button>
+    <button mat-icon-button (click)="removeWorkout(workout_index)" color="basic" aria-label="Delete workout"
+    matTooltip="Delete workout" [matTooltipPosition]="'above'">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+  </h2>
+  <!--
+      BODY
+    -->
+
+  <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+    [attr.id]="'accordion-body-' + workout_index" [attr.aria-labelledby]="'accordion-header-' + workout_index">
+    <form (submit)="addExercise()" style="display: none;" class="formButtonPairForm">
+      <div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <mat-label>Exercise name</mat-label>
+            <input matInput [(ngModel)]="newExerciseName" name="newExercise_name">
+          </mat-form-field>
+  
+          <ng-container *ngIf="durationInsteadOfDistance; then Duration; else Distance"></ng-container>
+  
+          <ng-template #Duration>
+            <mat-form-field class="example-full-width">
+              <mat-label>Duration</mat-label>
+              <input matInput [(ngModel)]="newExerciseDuration" type="number" name="newExercise_duration">
+            </mat-form-field>
+          </ng-template>
+  
+          <ng-template #Distance>
+            <mat-form-field class="example-full-width">
+              <mat-label>Distance</mat-label>
+              <input matInput [(ngModel)]="newExerciseDistance" type="number" name="newExercise_distance">
+            </mat-form-field>
+          </ng-template>
+        </div>
+        <div style="padding-right: 1rem;"> 
+          <mat-radio-group (change)="switchTimeDistance()" name="timeInsteadOfDistance">
+            <mat-radio-button value="true" [checked]="durationInsteadOfDistance === true"
+            matTooltip="Time based exercise" [matTooltipPosition]="'above'">min</mat-radio-button>
+            <mat-radio-button value="false" [checked]="durationInsteadOfDistance === false"
+            matTooltip="Distance based exercise" [matTooltipPosition]="'above'">km</mat-radio-button>
+          </mat-radio-group>  
+        </div>
+        <div>
+          <button mat-flat-button color="primary" type="button" (click)="cancelAddExercise($event)"
+          matTooltip="Close this form" [matTooltipPosition]="'above'">Cancel</button>
+          <button type="submit" mat-flat-button color="primary">Add exercise</button>
+        </div>
+      </div>
+    </form>
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="exercise_droplist">
+      <div *ngFor="let exercise of workout.exercises; let i = index" cdkDrag>
+        <mat-icon *ngIf="workouts[workout_index].exercises.length > 1; else notDraggable" color="basic"
+          style="opacity:.5" aria-label="Drag">drag_indicator</mat-icon>
+        <ng-template #notDraggable>
+          <mat-icon svgIcon="empty" aria-hidden="false" aria-label="No drag"></mat-icon>
+        </ng-template>
+        <span class="title">{{ exercise.name }} - {{ exercise.duration ? exercise.duration + ' sec' :
+          exercise.distance + ' km'}}</span>
+        <button mat-icon-button (click)="editExercise(i, exercise)" color="basic" aria-label="Edit"
+        matTooltip="Edit exercise" [matTooltipPosition]="'before'">
+          <mat-icon color="basic">edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="removeExercise(i)" color="basic" aria-label="Delete exercise"
+        matTooltip="Delete exercise" [matTooltipPosition]="'above'">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+        <!--div class="item">
+            </!--div-->
+        <hr>
+      </div>
+    </div>
+  </div>
+
+</cdk-accordion-item>
